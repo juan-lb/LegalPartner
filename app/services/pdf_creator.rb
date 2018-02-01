@@ -2,7 +2,7 @@ class PdfCreator
 
   require "prawn/measurement_extensions"
   
-  attr_reader :json, :pdf, :filename, full_path
+  attr_reader :json, :pdf, :filename, :full_path
 
   def initialize(post_params)
     @filename  = "#{SecureRandom.uuid}.pdf"
