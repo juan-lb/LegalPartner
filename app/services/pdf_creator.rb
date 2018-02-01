@@ -7,7 +7,7 @@ class PdfCreator
   def initialize(post_params)
     @filename  = "#{SecureRandom.uuid}.pdf"
     @full_path = File.join(Rails.root, "public/pdf_folder", filename)
-    @json      = JSON.parse(post_params[:pdf_json])
+    @json      = JSON.parse(post_params[:pdf_json], symbolize_names: true)
     @pdf       = Prawn::Document.new(page_size: 'LEGAL', margin: [5.cm,2.cm,1.5.cm,5.cm], font: 'Times-Roman')
                                                                  #top,right,bottom,left 
   end
