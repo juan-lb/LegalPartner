@@ -1,32 +1,20 @@
 class RenderService
 
-  attr_reader :json, :pdf
+  attr_reader :json, :pdf, :mode
 
   #Element Types
   PARAGRAPH = 'PARAGRAPH'.freeze
 
-  #Headings
-  HEADINGS = {
-    Title:    {size: 26},
-    Subtitle: {size: 15},
-    Heading1: {size: 20},
-    Heading2: {size: 16},
-    Heading3: {size: 14},
-    Heading4: {size: 12},
-    Heading5: {size: 11},
-    Heading6: {size: 11, styles: [:italic]},
-    Normal:   {size: 12, font: 'Times-Roman'}
-  }
-
-  def initialize(json, pdf)
+  def initialize(json, pdf, mode, font, font_size, spacing)
     @json = json
     @pdf  = pdf
+    @mode = ModeManager.new(mode, font, font_size, spacing)
   end
 
   def render_elements
     json.each do |element|
       if element[:type] == PARAGRAPH
-        pdf.formatted_text [render_paragraph(element)].flatten
+        pdf.formatted_text [render_paragraph(element)].flatten, mode.alignment(element[:alignment])
       end
     end
   end
@@ -34,7 +22,7 @@ class RenderService
   private
 
   def text_heading(text_hash, heading)
-    text_hash.merge(HEADINGS[heading.split.join.to_sym])
+    text_hash.merge(mode.headings(heading.split.join.to_sym))
   end
 
   def add_attributes(text_hash, attributes)
