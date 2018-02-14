@@ -21,6 +21,15 @@ class PdfCreator
 
   def create_pdf
     pdf.default_leading 10
+
+    pdf.font_families.update("Arial" => {
+      normal: Rails.root.join('app', 'assets', 'fonts', 'arial.ttf'),
+      italic: Rails.root.join('app', 'assets', 'fonts', 'ariali.ttf'),
+      bold:   Rails.root.join('app', 'assets', 'fonts', 'arialbd.ttf')
+    })
+
+    # Rails.root.join('app', 'assets', 'fonts', 'arialbi.ttf')
+
     RenderService.new(json, pdf, mode, font, font_size, spacing).render_elements
     pdf.render_file(full_path)
     filename
