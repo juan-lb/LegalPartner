@@ -22,7 +22,7 @@ class PdfCreator
   def create_pdf
     pdf.default_leading 10
 
-    pdf.font_families.update("Arial" => {
+    pdf.font_families.update("arial" => {
       normal:      Rails.root.join('app', 'assets', 'fonts', 'arial.ttf'),
       italic:      Rails.root.join('app', 'assets', 'fonts', 'ariali.ttf'),
       bold:        Rails.root.join('app', 'assets', 'fonts', 'arialbd.ttf'),
