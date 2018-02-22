@@ -4,6 +4,7 @@ class RenderService
 
   #Element Types
   PARAGRAPH = 'PARAGRAPH'.freeze
+  LISTITEM = 'LISTITEM'.freeze
 
   def initialize(json, pdf, mode, font, font_size, spacing)
     @json = json
@@ -15,11 +16,18 @@ class RenderService
     json.each do |element|
       if element[:type] == PARAGRAPH
         pdf.formatted_text [render_paragraph(element)].flatten, mode.alignment(element[:alignment])
+      elsif element[:type] == LISTITEM
+        pdf.formatted_text [render_listitem(element)].flatten
       end
     end
   end
 
   private
+  
+  def render_listitem(element)
+    res = render_text(element[:childs].first, 'normal')
+    res.unshift({text: '-- •'})
+  end
 
   def text_heading(text_hash, heading)
     text_hash.merge(mode.headings(heading.split.join.to_sym))
