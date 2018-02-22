@@ -20,7 +20,7 @@ class PdfCreator
   end
 
   def create_pdf
-    pdf.default_leading 10
+    # pdf.default_leading 10
 
     pdf.font_families.update("arial" => {
       normal:      Rails.root.join('app', 'assets', 'fonts', 'arial.ttf'),

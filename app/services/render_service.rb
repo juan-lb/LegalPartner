@@ -25,8 +25,9 @@ class RenderService
   private
   
   def render_listitem(element)
-    res = render_text(element[:childs].first, 'normal')
-    res.unshift({text: '-- •'})
+    res = render_text(element[:childs].first, element[:heading])
+    indent = ("\xC2\xA0"*4) * (element[:nesting_level].to_i + 1)
+    res.unshift({text: "#{indent}• "})
   end
 
   def text_heading(text_hash, heading)
