@@ -29,6 +29,13 @@ class PdfCreator
       bold_italic: Rails.root.join('app', 'assets', 'fonts', 'arialbi.ttf')
     })
 
+    pdf.font_families.update("trebuchet" => {
+      normal:      Rails.root.join('app', 'assets', 'fonts', 'trebuc.ttf'),
+      italic:      Rails.root.join('app', 'assets', 'fonts', 'trebucit.ttf'),
+      bold:        Rails.root.join('app', 'assets', 'fonts', 'trebucbd.ttf'),
+      bold_italic: Rails.root.join('app', 'assets', 'fonts', 'trebucbi.ttf')
+    })
+
     RenderService.new(json, pdf, mode, font, font_size, spacing).render_elements
     pdf.render_file(full_path)
     filename
