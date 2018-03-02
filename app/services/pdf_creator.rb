@@ -12,7 +12,7 @@ class PdfCreator
     @mode      = post_params[:mode]
     @font      = post_params[:font]
     @font_size = post_params[:font_size]
-    @spacing   = post_params[:spacing]
+    @spacing   = post_params[:spacing].to_i
     @pdf       = Prawn::Document.new(page_size: post_params[:paper_size],
                                      font:      post_params[:font],
                                      margin:    [5.cm,1.5.cm,2.cm,5.cm])
@@ -20,7 +20,7 @@ class PdfCreator
   end
 
   def create_pdf
-    # pdf.default_leading 10
+    pdf.default_leading spacing
 
     pdf.font_families.update("arial" => {
       normal:      Rails.root.join('app', 'assets', 'fonts', 'arial.ttf'),
