@@ -4,6 +4,8 @@ class PdfCreator
   
   attr_reader :json, :pdf, :filename, :full_path, :mode, :font, :font_size, :spacing
 
+  SPACING = {'1' => 1, '2' => 7, '3' => 14}
+
   def initialize(post_params)
     
     @filename  = "#{SecureRandom.uuid}.pdf"
@@ -12,7 +14,7 @@ class PdfCreator
     @mode      = post_params[:mode]
     @font      = post_params[:font]
     @font_size = post_params[:font_size]
-    @spacing   = post_params[:spacing].to_i
+    @spacing   = SPACING[post_params[:spacing]]
     @pdf       = Prawn::Document.new(page_size: post_params[:paper_size],
                                      font:      post_params[:font],
                                      margin:    [5.cm,1.5.cm,2.cm,5.cm])
