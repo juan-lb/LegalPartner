@@ -17,7 +17,13 @@ class PdfController < ApplicationController
     full_path_pdf = File.join(Rails.root, "public/pdf_folder", "#{filename}.pdf")
     full_path_png = File.join(Rails.root, "public/pdf_folder", "#{filename}.png")
     pdf   = Grim.reap(full_path_pdf) 
-    pdf[1].save(full_path_png)
+    pdf[0].save(full_path_png,{
+      :width => 600,         # defaults to 1024
+      :density => 72,        # defaults to 300
+      :quality => 60,        # defaults to 90
+      :colorspace => "CMYK", # defaults to "RGB"
+      :alpha => "Activate"   # not used when not set
+    })
   end
   
 end
