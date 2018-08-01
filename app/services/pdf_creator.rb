@@ -8,8 +8,8 @@ class PdfCreator
 
   def initialize(post_params)
     
-    @filename  = "#{SecureRandom.uuid}.pdf"
-    @full_path = File.join(Rails.root, "public/pdf_folder", filename)
+    @filename  = SecureRandom.uuid
+    @full_path = File.join(Rails.root, "public/pdf_folder", "#{filename}.pdf")
     @json      = JSON.parse(post_params[:pdf_json], symbolize_names: true)
     @mode      = post_params[:mode]
     @font      = post_params[:font]
@@ -40,7 +40,7 @@ class PdfCreator
 
     RenderService.new(json, pdf, mode, font, font_size, spacing).render_elements
     pdf.render_file(full_path)
-    filename, full_path
+    filename
   end
 
 end
