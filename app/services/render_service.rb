@@ -40,7 +40,7 @@ class RenderService
     end.compact
 
     attributes.each do |attr|      
-      text_hash[:size] = attr.last if attr.first == "FONT_SIZE"
+      text_hash[:size] = mode.size(attr.last) if attr.first == "FONT_SIZE"
     end
     text_hash[:styles] = styles unless styles.empty?
     text_hash

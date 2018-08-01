@@ -8,6 +8,10 @@ class ModeStrict
     @spacing   = spacing
   end
 
+  def size(_)
+    font_size.to_i
+  end
+
   def headings(_)
     {font: font, size: font_size.to_i}
   end
