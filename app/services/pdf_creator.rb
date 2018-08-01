@@ -40,7 +40,7 @@ class PdfCreator
 
     RenderService.new(json, pdf, mode, font, font_size, spacing).render_elements
     pdf.render_file(full_path)
-    filename
+    filename, full_path
   end
 
 end
