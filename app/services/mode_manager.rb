@@ -10,6 +10,10 @@ class ModeManager
     end
   end
 
+  def size(size)
+    mode.size(size)
+  end
+
   def headings(heading)
     mode.headings(heading)
   end
